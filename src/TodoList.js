@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ToDoUlSt = styled.ul``;
 
 function TodoList() {
-    return <ToDoUlSt>This is the sidebar</ToDoUlSt>;
+    return <ToDoUlSt>this is todo list</ToDoUlSt>;
 }
 
 export default TodoList;
