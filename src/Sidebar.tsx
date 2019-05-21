@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MdList } from "react-icons/md";
 
 const SidebarSt = styled("aside")`
     display: block;
@@ -14,13 +15,27 @@ const SidebarSt = styled("aside")`
 
     li {
         list-style: none;
+        background-color: #f4eeff;
+        padding: 12px 15px;
+        font-weight: 600;
+    }
+
+    svg {
+        color: #888888;
+        vertical-align: middle;
+        margin-right: 15px;
+    }
+
+    span {
+        vertical-align: middle;
     }
 `;
-//244	238	255
+
 const UserSt = styled("section")`
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-weight: 600;
     & > img {
         border-radius: 50%;
         margin-right: 10px;
@@ -43,7 +58,10 @@ const Sidebar = (props: IProps) => {
                 <span>{props.user.name}</span>
             </UserSt>
             <ul>
-                <li>Team To-Do List</li>
+                <li>
+                    <MdList />
+                    <span>Team To-Do List</span>
+                </li>
             </ul>
         </SidebarSt>
     );
