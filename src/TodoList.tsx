@@ -12,6 +12,11 @@ const ToDoUlSt = styled.ul`
             cursor: pointer;
             background-color: #f4eeff;
         }
+
+        &.completed {
+            color: grey;
+            text-decoration: line-through;
+        }
     }
 `;
 
@@ -29,7 +34,10 @@ const TodoList = (props: ITodoListProps) => {
     return (
         <ToDoUlSt>
             {props.todos.map((todo, i) => (
-                <li key={todo.id}>
+                <li
+                    key={todo.id}
+                    className={todo.isComplete ? "completed" : ""}
+                >
                     <InputWrapperSt>
                         <input
                             name="isGoing"
