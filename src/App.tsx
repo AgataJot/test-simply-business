@@ -42,22 +42,54 @@ interface IAppProps {
     };
 }
 
-const App = (props: IAppProps) => {
-    if (!props.data) return null;
-    const hasTodos = Boolean(props.data.todos.length);
-    const todosForActiveList = props.data.todos.filter(todo => todo.list === 1);
-    return (
-        <AppSt>
-            <Sidebar user={props.data.user} todoLists={props.data.todoLists} />
-            <MainSectionSt>
-                <HeaderSt>
-                    <h1>Team To-Do List</h1>
-                    <time>{moment().format("ddd D MMMM")}</time>
-                </HeaderSt>
-                <TodoList todos={todosForActiveList} />
-            </MainSectionSt>
-        </AppSt>
-    );
-};
+interface IAppState {
+    todos: ITodo[];
+}
+export class App extends React.Component<IAppProps, IAppState> {
+    constructor(props: IAppProps) {
+        super(props);
+        this.state = {
+            todos: props.data.todos.filter(todo => todo.list === 1),
+        };
+    }
+
+    static getDerivedStateFromProps(props: IAppProps): IAppState {
+        return {
+            todos: props.data.todos.filter(todo => todo.list === 1),
+        };
+    }
+
+    render() {
+        const { data } = this.props;
+        const { todos } = this.state;
+
+        if (!data) return null;
+
+        return (
+            <AppSt>
+                <Sidebar user={data.user} todoLists={data.todoLists} />
+                <MainSectionSt>
+                    <HeaderSt>
+                        <h1>Team To-Do List</h1>
+                        <time>{moment().format("ddd D MMMM")}</time>
+                    </HeaderSt>
+                    <TodoList
+                        todos={todos}
+                        toggleIsComplete={this.toggleTodoIsComplete}
+                    />
+                </MainSectionSt>
+            </AppSt>
+        );
+    }
+
+    toggleTodoIsComplete = (index: number) => {
+        const { todos } = this.state;
+        const isComplete = todos[index].isComplete;
+        todos[index].isComplete = !isComplete;
+        this.setState({
+            todos,
+        });
+    };
+}
 
 export default App;

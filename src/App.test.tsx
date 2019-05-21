@@ -73,8 +73,29 @@ describe("Todo List App", () => {
             expect(firstTitle.contains(appData().todos[0].title)).toEqual(true);
         });
 
-        it("allows adding new todo items to my Team To-Do List​ list", () => {});
-        it("allows delete todo items from my Team To-Do List list", () => {});
-        it("can mark todo items on my “​Team To-Do List​” as complete, and they should visually delineate themselves as being different from non-completed items.", () => {});
+        it.skip("allows adding new todo items to my Team To-Do List​ list", () => {});
+        it.skip("allows delete todo items from my Team To-Do List list", () => {});
+        it("can mark todo items on my “​Team To-Do List​” as complete, and they should visually delineate themselves as being different from non-completed items.", () => {
+            const todos = app.find(TodoList).dive();
+            const firstItem = todos
+                .find("li")
+                .first()
+                .children();
+            let checkbox = firstItem.find({ type: "checkbox" });
+
+            checkbox.simulate("change", { target: { checked: true } });
+
+            app.update();
+
+            const todos2 = app.find(TodoList).dive();
+            const firstItem2 = todos2
+                .find("li")
+                .first()
+                .children();
+            let checkbox2 = firstItem2.find({ type: "checkbox" });
+
+            expect(app.state().todos[0].isComplete).toBe(true);
+            expect(checkbox2.props().checked).toBe(true);
+        });
     });
 });
