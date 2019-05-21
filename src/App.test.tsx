@@ -10,12 +10,12 @@ describe("Todo List App", () => {
     let app;
 
     beforeEach(() => {
-        app = shallow(<App data={appData} />);
+        app = shallow(<App data={appData()} />);
     });
 
     it("renders without crashing", () => {
         const div = document.createElement("div");
-        ReactDOM.render(<App />, div);
+        ReactDOM.render(<App data={appData()} />, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
@@ -30,6 +30,7 @@ describe("Todo List App", () => {
         ).toEqual(true);
     });
 
+    // TODO
     it("does not allow logout", () => {
         const sidebar = app.find(Sidebar).dive();
         expect(sidebar.contains("Log out")).toEqual(false);
@@ -45,6 +46,7 @@ describe("Todo List App", () => {
         expect(todoListLi.contains("Team To-Do List")).toEqual(true);
     });
 
+    // TODO
     it("does not allow add or delete the list of todo lists, including amending their titles", () => {
         const sidebar = app.find(Sidebar).dive();
         const todoListUl = sidebar.find("ul");
@@ -52,14 +54,17 @@ describe("Todo List App", () => {
 
         expect(sidebar.contains("Add")).toEqual(false);
         expect(todoListLi.contains("Delete")).toEqual(false);
+        expect(todoListLi.contains(<input />)).toEqual(false);
     });
 
-    it('shows all of user\'s current todo list items in my "Team To-Do List​" list, if any exist', () => {
+    it('shows all of user\'s current todo list items in my "Team To-Do List​" list', () => {
         const todos = app.find(TodoList).dive();
 
         expect(app.contains(<h1>Team To-Do List</h1>)).toEqual(true);
         expect(todos.find(<li />)).toHaveLength(4);
     });
+
+    it('shows empty list in my "Team To-Do List​" list, if none exist', () => {});
 
     it("allows adding new todo items to my Team To-Do List​ list", () => {});
     it("allows delete todo items from my Team To-Do List list", () => {});
