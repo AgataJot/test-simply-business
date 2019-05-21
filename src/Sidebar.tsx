@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { MdList } from "react-icons/md";
+import IUser from "./models/User";
+import ITodoList from "./models/TodoList";
 
 const SidebarSt = styled("aside")`
     display: block;
@@ -42,15 +44,12 @@ const UserSt = styled("section")`
     }
 `;
 
-interface IUser {
-    name: string;
-    img: string;
-}
-interface IProps {
+interface ISidebarProp {
     user: IUser;
+    todoLists: ITodoList[];
 }
 
-const Sidebar = (props: IProps) => {
+const Sidebar = (props: ISidebarProp) => {
     return (
         <SidebarSt>
             <UserSt>

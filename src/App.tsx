@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import TodoList from "./TodoList";
 import moment from "moment";
+import IUser from "./models/User";
+import ITodoList from "./models/TodoList";
 
 const AppSt = styled.div`
     width: 100%;
@@ -31,15 +33,17 @@ const HeaderSt = styled.header`
     }
 `;
 
-function App() {
+interface IAppProps {
+    data: {
+        user: IUser;
+        todoLists: ITodoList[];
+    };
+}
+
+const App = (props: IAppProps) => {
     return (
         <AppSt>
-            <Sidebar
-                user={{
-                    name: "Agata Jewko",
-                    img: "http://placekitten.com/g/50/50",
-                }}
-            />
+            <Sidebar user={props.data.user} todoLists={props.data.todoLists} />
             <MainSectionSt>
                 <HeaderSt>
                     <h1>Team To-Do List</h1>
@@ -49,6 +53,6 @@ function App() {
             </MainSectionSt>
         </AppSt>
     );
-}
+};
 
 export default App;
