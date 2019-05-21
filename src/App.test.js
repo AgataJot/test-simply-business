@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { shallow } from "enzyme";
 import TodoList from "./TodoList";
+import Sidebar from "./Sidebar";
 
 it("renders without crashing", () => {
     const div = document.createElement("div");
@@ -10,7 +11,17 @@ it("renders without crashing", () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-it("shows profile pic and username", () => {});
+it("shows profile pic and username", () => {
+    const app = shallow(<App />);
+    const sidebar = app.find(Sidebar).dive();
+
+    expect(sidebar.contains(<span>Agata Jewko</span>)).toEqual(true);
+    expect(
+        sidebar.contains(
+            <img src="http://placekitten.com/g/50/50" alt="Agata Jewko" />,
+        ),
+    ).toEqual(true);
+});
 it("does not allow logout", () => {});
 it("shows an area containing a list of todo lists. This area has 1 fixed list, which is titled: 'Team To-Do List'", () => {
     const app = shallow(<App />);

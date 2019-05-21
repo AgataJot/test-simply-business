@@ -11,7 +11,7 @@ const AppSt = styled.div`
 `;
 
 const MainSectionSt = styled.section`
-    flex: 1 1 calc(100% - 200px);
+    flex: 1 1 calc(100% - 300px);
 `;
 
 const HeaderSt = styled.header`
@@ -27,13 +27,19 @@ const HeaderSt = styled.header`
     & > h1 {
         font-size: 2rem;
         font-weight: 200;
+        margin-bottom: 10px;
     }
 `;
 
 function App() {
     return (
         <AppSt>
-            <Sidebar />
+            <Sidebar
+                user={{
+                    name: "Agata Jewko",
+                    img: "http://placekitten.com/g/50/50",
+                }}
+            />
             <MainSectionSt>
                 <HeaderSt>
                     <h1>Team To-Do List</h1>
