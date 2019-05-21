@@ -7,8 +7,16 @@ const SidebarSt = styled("aside")`
     height: 100vh;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
     padding: 15px 10px;
-`;
 
+    ul {
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+`;
+//244	238	255
 const UserSt = styled("section")`
     display: flex;
     flex-direction: row;
@@ -35,7 +43,7 @@ const Sidebar = (props: IProps) => {
                 <span>{props.user.name}</span>
             </UserSt>
             <ul>
-                <li>Team To-Do list</li>
+                <li>Team To-Do List</li>
             </ul>
         </SidebarSt>
     );
