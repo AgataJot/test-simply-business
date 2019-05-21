@@ -37,7 +37,7 @@ function App() {
             <MainSectionSt>
                 <HeaderSt>
                     <h1>Team To-Do List</h1>
-                    <time>{moment().format()}</time>
+                    <time>{moment().format("ddd D MMMM")}</time>
                 </HeaderSt>
                 <TodoList />
             </MainSectionSt>
