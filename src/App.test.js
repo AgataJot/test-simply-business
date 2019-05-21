@@ -22,7 +22,11 @@ it("shows profile pic and username", () => {
         ),
     ).toEqual(true);
 });
-it("does not allow logout", () => {});
+it("does not allow logout", () => {
+    const app = shallow(<App />);
+    const sidebar = app.find(Sidebar).dive();
+    expect(sidebar.contains("Log out")).toEqual(false);
+});
 it("shows an area containing a list of todo lists. This area has 1 fixed list, which is titled: 'Team To-Do List'", () => {
     const app = shallow(<App />);
 
